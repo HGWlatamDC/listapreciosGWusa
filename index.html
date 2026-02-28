@@ -3,16 +3,22 @@
 <head>
   <meta charset="UTF-8" />
   <title>Lista de Precios USA GGW</title>
-  <style>
-    :root {
-      --bg: #ffffff;
-      --bg-alt: #f5f7fb;
-      --primary: #0b7fab;
-      --primary-soft: #e2f3fa;
-      --text: #222222;
-      --muted: #666666;
-      --border: #d4d9e2;
-    }
+  <style> #gww-precios tbody tr:nth-child(odd) {
+  background: #ffffff;      /* filas impares blancas */
+}
+#gww-precios tbody tr:nth-child(even) {
+  background: var(--bg-alt); /* filas pares gris muy claro */
+}
+
+   :root {
+  --bg: #ffffff;
+  --bg-alt: #f7f9fc;        /* gris muy clarito filas alternas */
+  --primary: #1b5f9e;       /* azul más suave para encabezado */
+  --primary-soft: #eef4ff;  /* azul claro para columna miembro */
+  --text: #222222;
+  --muted: #6c6c6c;
+  --border: #dde1ec;
+}
     * {
       box-sizing: border-box;
     }
