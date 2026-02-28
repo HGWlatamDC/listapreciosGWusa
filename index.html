@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <title>Lista de Precios USA GGW</title>
+  <style>
+    :root {
+      --bg: #ffffff;
+      --bg-alt: #f5f7fb;
+      --primary: #0b7fab;
+      --primary-soft: #e2f3fa;
+      --text: #222222;
+      --muted: #666666;
+      --border: #d4d9e2;
+    }
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--text);
+    }
+    #gww-precios {
+      max-width: 1200px;
+      margin: 0 auto 32px;
+      padding: 24px 12px 40px;
+    }
+    #gww-precios h2 {
+      font-size: 28px;
+      margin: 0 0 8px;
+      color: var(--primary);
+    }
+    #gww-precios .subtitle {
+      font-size: 14px;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    #gww-precios .filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 10px;
+      align-items: center;
+    }
+    #gww-precios .filters label {
+      font-size: 13px;
+      color: var(--muted);
+    }
+    #gww-precios .filters select,
+    #gww-precios .filters input {
+      font-size: 14px;
+      padding: 6px 10px;
+      border-radius: 6px;
+      border: 1px solid var(--border);
+      min-width: 160px;
+    }
+    #gww-precios .table-wrapper {
+      margin-top: 6px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      overflow: hidden;
+      background: #ffffff;
+    }
+    #gww-precios .table-scroll {
+      max-height: 70vh;
+      overflow: auto;
+    }
+    #gww-precios table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    #gww-precios thead {
+      position: sticky;
+      top: 0;
+      z-index: 1;
+    }
+    #gww-precios thead tr {
+      background: var(--primary);
+      color: #ffffff;
+    }
+    #gww-precios th,
+    #gww-precios td {
+      padding: 8px 6px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    #gww-precios th:nth-child(1),
+    #gww-precios td:nth-child(1) {
+      position: sticky;
+      left: 0;
+      background: inherit;
+      z-index: 2;
+      max-width: 260px;
+      white-space: normal;
+    }
+    #gww-precios th:nth-child(1) {
+      background: var(--primary);
+    }
+    #gww-precios tbody tr:nth-child(even) {
+      background: var(--bg-alt);
+    }
+    #gww-precios .col-precio-publico {
+      font-weight: 600;
+    }
+    #gww-precios .col-miembro-total {
+      background: var(--primary-soft);
+      font-weight: 600;
+    }
+    #gww-precios .col-descuento,
+    #gww-precios .col-margen {
+      color: #0b7945;
+      font-weight: 600;
+    }
+    #gww-precios .col-categoria {
+      color: var(--muted);
+      font-size: 12px;
+    }
+    #gww-precios .pill {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: var(--primary-soft);
+      color: var(--primary);
+      font-weight: 600;
+    }
+    @media (max-width: 768px) {
+      #gww-precios {
+        padding: 16px 8px 24px;
+      }
+      #gww-precios h2 {
+        font-size: 22px;
+      }
+      #gww-precios table {
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div id="gww-precios">
+    <h2>Lista de Precios USA</h2>
+    <div class="subtitle">
+      Great Green World · Precios para público y miembros (PVP, precio miembro + impuestos, % de descuento y margen).
+    </div>
+
+    <div class="filters">
+      <div>
+        <label for="gww-search">Buscar producto:</label><br />
+        <input type="text" id="gww-search" placeholder="Escribe el nombre del producto..." />
+      </div>
+      <div>
+        <label for="gww-category">Categoría:</label><br />
+        <select id="gww-category">
+          <option value="">Todas las categorías</option>
+          <option value="Natural Health Products">Natural Health Products</option>
+          <option value="Tourmaline / Far Infrared">Tourmaline / Far Infrared</option>
+          <option value="Herramientas de Negocio">Herramientas de Negocio</option>
+          <option value="Alimentación">Alimentación</option>
+          <option value="Nutrición">Nutrición</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="table-wrapper">
+      <div class="table-scroll">
+        <table id="gww-table">
+          <thead>
+            <tr>
+              <th>Producto</th>
+              <th>Categoría</th>
+              <th class="col-precio-publico">PVP (Público)</th>
+              <th>Miembro (sin imp.)</th>
+              <th class="col-miembro-total">Miembro + impuestos</th>
+              <th>PV</th>
+              <th class="col-descuento">Descuento %</th>
+              <th class="col-margen">Margen %</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- AQUÍ VAN LAS FILAS DE PRODUCTOS (TR) -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  (function() {
+    var searchInput = document.getElementById('gww-search');
+    var categorySelect = document.getElementById('gww-category');
+    var rows = Array.prototype.slice.call(
+      document.querySelectorAll('#gww-table tbody tr')
+    );
+
+    function applyFilters() {
+      var term = (searchInput.value || '').toLowerCase().trim();
+      var category = categorySelect.value;
+
+      rows.forEach(function(row) {
+        var nameText = row.cells[0].innerText.toLowerCase();
+        var rowCategory = row.getAttribute('data-category') || '';
+        var matchName = !term || nameText.indexOf(term) !== -1;
+        var matchCategory = !category || rowCategory === category;
+        row.style.display = (matchName && matchCategory) ? '' : 'none';
+      });
+    }
+
+    searchInput.addEventListener('input', applyFilters);
+    categorySelect.addEventListener('change', applyFilters);
+  })();
+  </script>
+</body>
+</html>
